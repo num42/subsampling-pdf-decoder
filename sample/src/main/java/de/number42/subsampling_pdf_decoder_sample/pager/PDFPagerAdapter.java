@@ -72,13 +72,15 @@ public class PDFPagerAdapter extends PagerAdapter {
 
     SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(context);
 
-    // the smaller this number, the smaller the chance to get a "outOfMemoryException"
+    // the smaller this number, the smaller the chance to get an "outOfMemoryException"
     // still, values lower than 100 really do affect the quality of the pdf picture
     int minimumTileDpi = 120;
     imageView.setMinimumTileDpi(minimumTileDpi);
 
+    //sets the PDFDecoder for the imageView
     imageView.setBitmapDecoderFactory(() -> new PDFDecoder(position, file, scale));
 
+    //sets the PDFRegionDecoder for the imageView
     imageView.setRegionDecoderFactory(() -> new PDFRegionDecoder(position, file, scale));
 
     ImageSource source = ImageSource.uri(file.getAbsolutePath());
