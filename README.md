@@ -1,6 +1,6 @@
 Overview
 -------
-This library extends the  [subsampling-scale-image-view] with two additional PDF decoder classes.
+This library gives you the possibility to extend the  [subsampling-scale-image-view] with two additional PDF decoder classes.
 
 Getting started
 -------
