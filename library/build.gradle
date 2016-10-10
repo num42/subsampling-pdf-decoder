@@ -1,14 +1,29 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
 buildscript {
   repositories {
     mavenCentral()
     jcenter()
   }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.0'
-  }
 }
 
-apply plugin: 'com.android.library'
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+}
+
+
+
+
+def siteUrl = 'https://github.com/num42/subsampling-pdf-decoder'
+def gitUrl = 'https://github.com/num42/subsampling-pdf-decoder.git'
 
 
 // Manifest version information!
@@ -18,6 +33,9 @@ def versionPatch = 0
 def versionBuild = 0
 // bump for dogfood builds, public betas, etc.
 
+version = "${versionMajor}.${versionMinor}.${versionPatch}"
+group = "de.number42"
+
 android {
   compileSdkVersion 24
   buildToolsVersion "24.0.1"
@@ -26,7 +44,7 @@ android {
     minSdkVersion 21
     targetSdkVersion 24
     versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-    versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    versionName version
 
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -39,6 +57,76 @@ android {
   }
 }
 
-dependencies {
-  compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+  user = properties.getProperty("bintray.user")
+  key = properties.getProperty("bintray.apikey")
+
+  configurations = ['archives']
+  pkg {
+    repo = "maven"
+    name = "subsampling-pdf-decoder"
+    userOrg = properties.getProperty("bintray.org")
+    websiteUrl = siteUrl
+    vcsUrl = gitUrl
+    licenses = ["Apache-2.0"]
+    publish = true
+  }
+}
+
+install {
+  repositories.mavenInstaller {
+    pom {
+      project {
+        artifactId="subsampling_pdf_decoder"
+        packaging 'aar'
+        name 'A PDFDecoder library extending the subsampling-scale-image-view library for Android'
+        url siteUrl
+        licenses {
+          license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+          }
+        }
+        developers {
+          developer {
+            id 'stefanplindner'
+            name 'Stefan Lindner'
+            email 'stefan.p.lindner.dev@gmail.com'
+          }
+        }
+        scm {
+          connection gitUrl
+          developerConnection gitUrl
+          url siteUrl
+        }
+      }
+    }
+  }
+}
+
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+  source = android.sourceSets.main.java.srcDirs
+  failOnError false
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+artifacts {
+  archives javadocJar
+  archives sourcesJar
+}
+
+task findConventions << {
+  println project.getConvention()
 }
