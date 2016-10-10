@@ -15,11 +15,12 @@ repositories {
 }
 
 dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
   compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
 }
 
 
-group = "de.number42"
+
 
 def siteUrl = 'https://github.com/num42/subsampling-pdf-decoder'
 def gitUrl = 'https://github.com/num42/subsampling-pdf-decoder.git'
@@ -32,6 +33,9 @@ def versionPatch = 0
 def versionBuild = 0
 // bump for dogfood builds, public betas, etc.
 
+version = "${versionMajor}.${versionMinor}.${versionPatch}"
+group = "de.number42"
+
 android {
   compileSdkVersion 24
   buildToolsVersion "24.0.1"
@@ -40,7 +44,7 @@ android {
     minSdkVersion 21
     targetSdkVersion 24
     versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-    versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    versionName version
 
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -64,6 +68,7 @@ bintray {
   pkg {
     repo = "maven"
     name = "subsampling-pdf-decoder"
+    userOrg = properties.getProperty("bintray.org")
     websiteUrl = siteUrl
     vcsUrl = gitUrl
     licenses = ["Apache-2.0"]
@@ -75,6 +80,7 @@ install {
   repositories.mavenInstaller {
     pom {
       project {
+        artifactId="subsampling_pdf_decoder"
         packaging 'aar'
         name 'A PDFDecoder library extending the subsampling-scale-image-view library for Android'
         url siteUrl
@@ -86,9 +92,9 @@ install {
         }
         developers {
           developer {
-            id 'slin'
+            id 'stefanplindner'
             name 'Stefan Lindner'
-            email 'slin@num42.de'
+            email 'stefan.p.lindner.dev@gmail.com'
           }
         }
         scm {
@@ -108,6 +114,7 @@ task sourcesJar(type: Jar) {
 
 task javadoc(type: Javadoc) {
   source = android.sourceSets.main.java.srcDirs
+  failOnError false
   classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
 
