@@ -35,6 +35,7 @@ def versionBuild = 0
 
 version = "${versionMajor}.${versionMinor}.${versionPatch}"
 group = "de.number42"
+archivesBaseName = 'subsampling-pdf-decoder'
 
 android {
   compileSdkVersion 24
