@@ -80,7 +80,7 @@ install {
   repositories.mavenInstaller {
     pom {
       project {
-        artifactId="subsampling_pdf_decoder"
+        artifactId="subsampling-pdf-decoder"
         packaging 'aar'
         name 'A PDFDecoder library extending the subsampling-scale-image-view library for Android'
         url siteUrl
