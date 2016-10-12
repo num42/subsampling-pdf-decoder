@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
@@ -12,19 +12,76 @@
     tools:context="de.number42.subsampling_pdf_decoder_sample.MainActivity"
     >
 
-  <fr.castorflex.android.verticalviewpager.VerticalViewPager
-      android:id="@+id/pager"
+  <ViewAnimator
+      android:id="@+id/animator"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      />
+      >
 
-  <TextView
-      android:id="@+id/pages"
-      android:gravity="start|left"
-      android:layout_margin="20dp"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:background="@drawable/rounded_grey_corner"
-      android:textSize="18sp"
-      />
-</RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/pager_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+      <fr.castorflex.android.verticalviewpager.VerticalViewPager
+          android:id="@+id/pager"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          />
+
+      <TextView
+          android:id="@+id/pages"
+          android:gravity="start|left"
+          android:layout_margin="20dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/rounded_grey_corner"
+          android:textSize="18sp"
+          />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/use_external_pdf_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="48dp"
+        >
+      <ImageView
+          android:id="@+id/error_image"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:layout_marginBottom="12dp"
+          android:layout_marginTop="12dp"
+          android:src="@drawable/ic_error_outline_black_24dp"
+          />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_above="@id/error_image"
+          android:gravity="center_horizontal"
+          android:text="@string/pdf_load_with_external_viewer_message"
+          android:textColor="?android:attr/textColorPrimary"
+          android:textSize="30sp"
+          />
+      <TextView
+          android:id="@+id/pdf_message"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/error_image"
+          android:gravity="center_horizontal"
+          android:text="@string/pdf_load_with_external_viewer_reason"
+          />
+      <Button
+          android:id="@+id/btnLoadExtern"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/pdf_message"
+          android:layout_centerHorizontal="true"
+          android:text="@string/pdf_load_with_external_viewer_button"
+          />
+    </RelativeLayout>
+
+  </ViewAnimator>
+</FrameLayout>

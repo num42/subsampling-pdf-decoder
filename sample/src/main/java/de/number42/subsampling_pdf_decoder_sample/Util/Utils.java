@@ -20,7 +20,7 @@ public class Utils {
    * @return the pdf file in the cache
    */
   public static File getFileFromAssets(Activity activity, String filename) {
-    File f = new File(activity.getCacheDir() + "/Kanban.pdf");
+    File f = new File(activity.getCacheDir() + filename);
     if (!f.exists()) {
       try {
         InputStream is = activity.getAssets().open(filename);
