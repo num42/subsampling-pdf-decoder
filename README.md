@@ -1,15 +1,27 @@
 Overview
 -------
-This library gives you the possibility to extend the  [subsampling-scale-image-view] with two additional PDF decoder classes.
+This library adds two pdf decoder classes for the [subsampling-scale-image-view].
 
 Getting started
 -------
-Section will be added soon.
-
-How to use it
+Usage
 -------
-See the code sample. Basically you have to use a ViewPager and a PagerAdapter which read your PDF file.
-The decoder classes have to be bound to an instance of the subsampling-scale-image-view.
+
+The classes provided in this library need Version 21 (Lollipop) or above.
+
+```
+repositories {
+    maven { url 'https://dl.bintray.com/n42/maven'}
+}
+
+dependencies {
+    compile 'de.number42:subsampling-pdf-decoder:0.1.0@aar'
+}
+```
+
+For further instructions how to use it, see the sample application. There we use a [VerticalViewPager] and a PagerAdapter.
+Within the PagerAdapter we use the subsampling-scale-image-view and this's decoder classes.
+
 
 License
 -------
@@ -30,3 +42,4 @@ License
 
 
 [subsampling-scale-image-view]: https://github.com/davemorrissey/subsampling-scale-image-view
+[VerticalViewPager]: https://github.com/castorflex/VerticalViewPager
