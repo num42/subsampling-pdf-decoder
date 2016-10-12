@@ -16,11 +16,13 @@
 
 package de.number42.subsampling_pdf_decoder;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.pdf.PdfRenderer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import com.davemorrissey.labs.subscaleview.decoder.ImageDecoder;
 import java.io.File;
@@ -28,6 +30,7 @@ import java.io.File;
 /**
  * Decodes and renders a {@link PdfRenderer.Page} into a {@link Bitmap}
  */
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class PDFDecoder implements ImageDecoder {
 
   /**

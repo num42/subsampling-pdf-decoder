@@ -16,6 +16,7 @@
 
 package de.number42.subsampling_pdf_decoder;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -23,6 +24,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.pdf.PdfRenderer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import com.davemorrissey.labs.subscaleview.decoder.ImageRegionDecoder;
 import java.io.File;
@@ -31,7 +33,7 @@ import java.io.IOException;
 /**
  * Decodes and renders a given rect out of a {@link PdfRenderer.Page} into a {@link Bitmap}
  */
-
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class PDFRegionDecoder implements ImageRegionDecoder{
   /**
    * the page that will be rendered to a bitmap.
