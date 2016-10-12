@@ -4,8 +4,6 @@ This library adds two pdf decoder classes for the [subsampling-scale-image-view]
 
 Getting started
 -------
-Usage
--------
 
 The classes provided in this library need Version 21 (Lollipop) or above.
 
