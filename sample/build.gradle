@@ -17,7 +17,7 @@ android {
   buildToolsVersion "24.0.1"
   defaultConfig {
     applicationId "de.number42.subsampling_pdf_decoder"
-    minSdkVersion 21
+    minSdkVersion 16
     targetSdkVersion 24
     versionCode 1
     versionName "1.0"
@@ -34,8 +34,6 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 }
-
-
 
 apply plugin: 'com.neenbedankt.android-apt'
 dependencies {
