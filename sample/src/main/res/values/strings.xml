@@ -4,7 +4,7 @@
 
   <string name="pdf_load_with_external_viewer_message">"External pdf viewer is needed."</string>
 
-  <string name="pdf_load_with_external_viewer_reason">"Your android device version does not support this Feature. To view this card an external pdf viewer is needed."</string>
+  <string name="pdf_load_with_external_viewer_reason">"Your android device version does not support this Feature. To view this pdf an external pdf viewer is needed."</string>
 
   <string name="pdf_load_with_external_viewer_button">"Open pdf externally"</string>
 </resources>
