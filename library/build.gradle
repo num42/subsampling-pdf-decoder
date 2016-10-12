@@ -15,7 +15,6 @@ repositories {
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
   compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
 }
 
