@@ -9,7 +9,7 @@ The classes provided in this library need Version 21 (Lollipop) or above.
 
 ```
 repositories {
-    maven { url 'https://dl.bintray.com/n42/maven'}
+    jcenter()
 }
 
 dependencies {
