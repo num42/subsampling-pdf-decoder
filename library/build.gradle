@@ -6,16 +6,18 @@ buildscript {
   repositories {
     mavenCentral()
     jcenter()
+    google()
   }
 }
 
 repositories {
   mavenCentral()
   jcenter()
+  google()
 }
 
 dependencies {
-  compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+  implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.9.0'
 }
 
 
@@ -37,12 +39,11 @@ group = "de.number42"
 archivesBaseName = 'subsampling-pdf-decoder'
 
 android {
-  compileSdkVersion 24
-  buildToolsVersion "24.0.1"
-
+  compileSdkVersion 27
+  buildToolsVersion '27.0.2'
   defaultConfig {
     minSdkVersion 21
-    targetSdkVersion 24
+    targetSdkVersion 27
     versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     versionName version
 
