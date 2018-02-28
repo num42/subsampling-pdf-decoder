@@ -19,6 +19,8 @@ package de.number42.subsampling_pdf_decoder;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -34,7 +36,7 @@ import java.io.IOException;
  * Decodes and renders a given rect out of a {@link PdfRenderer.Page} into a {@link Bitmap}
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class PDFRegionDecoder implements ImageRegionDecoder{
+public class PDFRegionDecoder implements ImageRegionDecoder {
   /**
    * the page that will be rendered to a bitmap.
    */
@@ -66,15 +68,22 @@ public class PDFRegionDecoder implements ImageRegionDecoder{
   private File file;
 
   /**
-   * basic constructor for PDFDecoder.
-   * @Param position:the current position in the pdf
-   * @Param file: the pdf-file
-   * @param scale: the scale factor
+   * the background color of the pdf file. Default is white
    */
-  public PDFRegionDecoder(int position , File file,  float scale) {
+  private int backgroundColorPdf = Color.WHITE;
+
+  /**
+   * basic constructor for PDFDecoder.
+   * @param position:the current position in the pdf
+   * @param file: the pdf-file
+   * @param scale: the scale factor
+   * @param backgroundColorPdf: the background color of the pdf
+   */
+  public PDFRegionDecoder(int position , File file,  float scale, int backgroundColorPdf) {
     this.file = file;
     this.scale = scale;
     this.position = position;
+    this.backgroundColorPdf = backgroundColorPdf;
   }
 
   /**
@@ -113,6 +122,9 @@ public class PDFRegionDecoder implements ImageRegionDecoder{
     Matrix matrix = new Matrix();
     matrix.setScale(scale/sampleSize,scale/sampleSize);
     matrix.postTranslate(-rect.left/sampleSize, -rect.top/sampleSize);
+    Canvas canvas = new Canvas(bitmap);
+    canvas.drawColor(backgroundColorPdf);
+    canvas.drawBitmap(bitmap,0,0,null);
     page.render(bitmap, null, matrix, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
 
     return bitmap;
