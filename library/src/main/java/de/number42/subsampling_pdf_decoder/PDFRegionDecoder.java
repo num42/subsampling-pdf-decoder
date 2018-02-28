@@ -73,6 +73,9 @@ public class PDFRegionDecoder implements ImageRegionDecoder {
    */
   private int backgroundColorPdf;
 
+
+
+
   /**
    * basic constructor for PDFDecoder.
    * @param position:the current position in the pdf
@@ -84,7 +87,7 @@ public class PDFRegionDecoder implements ImageRegionDecoder {
   }
 
   /**
-   * basic constructor for PDFDecoder.
+   * extended constructor for PDFDecoder with a customizable background color.
    * @param position:the current position in the pdf
    * @param file: the pdf-file
    * @param scale: the scale factor
