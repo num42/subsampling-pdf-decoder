@@ -69,6 +69,8 @@ public class PDFRegionDecoder implements ImageRegionDecoder{
    * basic constructor for PDFDecoder.
    * @Param position:the current position in the pdf
    * @Param file: the pdf-file
+   * @param position:the current position in the pdf
+   * @param file: the pdf-file
    * @param scale: the scale factor
    */
   public PDFRegionDecoder(int position , File file,  float scale) {
