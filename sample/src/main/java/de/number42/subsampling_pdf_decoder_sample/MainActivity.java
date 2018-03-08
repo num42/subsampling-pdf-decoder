@@ -19,7 +19,7 @@ import fr.castorflex.android.verticalviewpager.VerticalViewPager;
 /**
  * This class simply shows a pdf file within the activity
  */
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity {
 
   /**
    * name of the pdf in assets folder
@@ -57,11 +57,29 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     ButterKnife.bind(this);
 
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-      pager.setOnPageChangeListener(this);
       animator.setDisplayedChild(1);
     } else {
       setPDF();
     }
+
+    pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+      @Override
+      public void onPageSelected(int index) {
+        MainActivity.this.onPageSelected(index);
+      }
+    });
+
+  }
+
+
+  /**
+   * Callback method for the {@link #onPageSelected(int)} to handle setting the
+   * page number in the activity
+   * @param position the current position in the pager
+   */
+  private void onPageSelected(int position) {
+    this.currentPosition = position;
+    updatePageCounter();
   }
 
   /**
@@ -73,21 +91,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     pagerAdapter = new PDFPagerAdapter(this, Utils.getFileFromAssets(this, pdfName));
     pager.setAdapter(pagerAdapter);
     updatePageCounter();
-  }
-
-  //listener functions
-  @Override public void onPageScrolled(int position, float positionOffset,
-      int positionOffsetPixels) {
-
-  }
-
-  @Override public void onPageSelected(int position) {
-    this.currentPosition = position;
-    updatePageCounter();
-  }
-
-  @Override public void onPageScrollStateChanged(int state) {
-
   }
 
   /**
