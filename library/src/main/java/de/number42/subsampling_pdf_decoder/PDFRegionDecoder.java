@@ -138,9 +138,7 @@ public class PDFRegionDecoder implements ImageRegionDecoder {
     matrix.setScale(scale/sampleSize,scale/sampleSize);
     matrix.postTranslate(-rect.left/sampleSize, -rect.top/sampleSize);
     Canvas canvas = new Canvas(bitmap);
-    if (backgroundColorPdf != 0) {
-      canvas.drawColor(backgroundColorPdf);
-    }
+    canvas.drawColor(backgroundColorPdf);
     canvas.drawBitmap(bitmap,0,0,null);
     page.render(bitmap, null, matrix, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
 
