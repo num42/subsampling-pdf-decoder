@@ -2,7 +2,7 @@ Overview
 -------
 This library adds two pdf decoder classes for the [subsampling-scale-image-view].
 
-![subsampling-pdf-decoder example](https://raw.githubusercontent.com/num42/subsampling-pdf-decoder/master/example.gif =250x)
+<img src="https://raw.githubusercontent.com/num42/subsampling-pdf-decoder/master/example.gif" width="250" />
 
 Getting started
 -------
