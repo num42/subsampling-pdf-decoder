@@ -2,6 +2,8 @@ Overview
 -------
 This library adds two pdf decoder classes for the [subsampling-scale-image-view].
 
+![subsampling-pdf-decoder example](https://raw.githubusercontent.com/num42/subsampling-pdf-decoder/master/example.gif =250x)
+
 Getting started
 -------
 
@@ -17,7 +19,7 @@ dependencies {
 }
 ```
 
-For further instructions how to use it, see the sample application. There we use a [VerticalViewPager] and a PagerAdapter.
+For further instructions on how to use it, see the sample application. There we use a [VerticalViewPager] and a PagerAdapter.
 Within the PagerAdapter we use the subsampling-scale-image-view and this's decoder classes.
 
 
