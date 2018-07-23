@@ -4,14 +4,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import de.number42.subsampling_pdf_decoder_sample.Util.Utils;
 import de.number42.subsampling_pdf_decoder_sample.pager.PDFPagerAdapter;
 import fr.castorflex.android.verticalviewpager.VerticalViewPager;
@@ -29,17 +25,17 @@ public class MainActivity extends AppCompatActivity {
   /**
    * A {@VerticalViewPager} to scroll vertical within the pdf
    */
-  @BindView(R.id.pager) VerticalViewPager pager;
+  VerticalViewPager pager;
 
   /**
    * Shows the page count
    */
-  @BindView(R.id.pages) TextView pages;
+  TextView pages;
 
   /**
    * The animator to switch between views.
    */
-  @BindView(R.id.animator) ViewAnimator animator;
+  ViewAnimator animator;
 
   /**
    * The {@PDFPagerAdapter} implemented in this example
@@ -54,7 +50,17 @@ public class MainActivity extends AppCompatActivity {
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
+
+
+    pager = findViewById(R.id.pager);
+    pages = findViewById(R.id.pages);
+    animator = findViewById(R.id.animator);
+
+    findViewById(R.id.btnLoadExtern).setOnClickListener(view -> {
+      Toast toast = Toast.makeText(MainActivity.this, "Implement an intent to show the pdf externally", Toast.LENGTH_SHORT);
+      toast.show();
+    });
+
 
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
       animator.setDisplayedChild(1);
@@ -93,15 +99,6 @@ public class MainActivity extends AppCompatActivity {
     updatePageCounter();
   }
 
-  /**
-   * Shows a toast with further instructions.
-   *
-   * @param view view parameter of the button click
-   */
-  @OnClick(R.id.btnLoadExtern) public void loadExtern(View view) {
-    Toast toast = Toast.makeText(this, "Implement an intent to show the pdf externally", Toast.LENGTH_SHORT);
-    toast.show();
-  }
 
   /**
    * updates the page counter while scrolling through the pdf
