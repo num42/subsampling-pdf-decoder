@@ -11,7 +11,7 @@ The classes provided in this library need version 21 (Lollipop) or above.
 
 The following code renders a single pdf page into a interactive view:
 
-```
+```java
 SubsamplingScaleImageView imageView = new SubsamplingScaleImageView(context);
 
 // the smaller this number, the smaller the chance to get an "outOfMemoryException"
@@ -34,7 +34,7 @@ Within the PagerAdapter we use the subsampling-scale-image-view and this's decod
 
 Download
 -------
-```
+```groovy
 repositories {
     jcenter()
 }
