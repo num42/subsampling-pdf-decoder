@@ -1,51 +1,28 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: "com.vanniktech.maven.publish"
 
 buildscript {
   repositories {
     mavenCentral()
-    jcenter()
     google()
+    gradlePluginPortal()
+  }
+  dependencies {
+    classpath 'com.vanniktech:gradle-maven-publish-plugin:0.8.0'
   }
 }
 
-repositories {
-  mavenCentral()
-  jcenter()
-  google()
-}
+group = GROUP
+version = VERSION_NAME
 
-dependencies {
-  implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.9.0'
-}
-
-
-
-
-def siteUrl = 'https://github.com/num42/subsampling-pdf-decoder'
-def gitUrl = 'https://github.com/num42/subsampling-pdf-decoder.git'
-
-
-// Manifest version information!
-def versionMajor = 0
-def versionMinor = 3
-def versionPatch = 0
-def versionBuild = 0
-// bump for dogfood builds, public betas, etc.
-
-version = "${versionMajor}.${versionMinor}.${versionPatch}"
-group = "de.number42"
-archivesBaseName = 'subsampling-pdf-decoder'
 
 android {
   compileSdkVersion 27
   buildToolsVersion '27.0.3'
+
   defaultConfig {
     minSdkVersion 21
     targetSdkVersion 27
-    versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-    versionName version
 
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -58,76 +35,27 @@ android {
   }
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-  user = properties.getProperty("bintray.user")
-  key = properties.getProperty("bintray.apikey")
-
-  configurations = ['archives']
-  pkg {
-    repo = "maven"
-    name = "subsampling-pdf-decoder"
-    userOrg = properties.getProperty("bintray.org")
-    websiteUrl = siteUrl
-    vcsUrl = gitUrl
-    licenses = ["Apache-2.0"]
-    publish = true
-  }
+dependencies {
+  implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.9.0'
 }
 
-install {
-  repositories.mavenInstaller {
-    pom {
-      project {
-        artifactId="subsampling-pdf-decoder"
-        packaging 'aar'
-        name 'A PDFDecoder library extending the subsampling-scale-image-view library for Android'
-        url siteUrl
-        licenses {
-          license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-          }
-        }
-        developers {
-          developer {
-            id 'stefanplindner'
-            name 'Stefan Lindner'
-            email 'stefan.p.lindner.dev@gmail.com'
-          }
-        }
-        scm {
-          connection gitUrl
-          developerConnection gitUrl
-          url siteUrl
-        }
-      }
+repositories {
+  mavenCentral()
+  jcenter()
+  google()
+}
+
+mavenPublish {
+  targets {
+    uploadArchives {
+      signing = false
+      releaseRepositoryUrl = "https://bintray.com/api/v1/maven/n42/maven/pdfview/;publish=1"
+
+      Properties properties = new Properties()
+      properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+      repositoryUsername = properties.getProperty("bintray.user")
+      repositoryPassword = properties.getProperty("bintray.apikey")
     }
   }
-}
-
-task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  failOnError false
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
-}
-artifacts {
-  archives javadocJar
-  archives sourcesJar
-}
-
-task findConventions << {
-  println project.getConvention()
 }
